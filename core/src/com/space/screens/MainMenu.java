@@ -384,7 +384,7 @@ public class MainMenu implements Screen {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelTwo")) {
                 this.states = States.LOADING_LEVEL2;
                 this.app.accessMusic.play();
-                this.app.levelOneVictoryMusic.stop();
+                this.app.levelVictoryMusic.stop();
                 this.app.welcomeMusic.stop();
             }
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && !this.app.saveData.getSaveData().getBoolean("levelTwo")) {
@@ -412,7 +412,7 @@ public class MainMenu implements Screen {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelThree")) {
                 this.states = States.LOADING_LEVEL3;
                 this.app.accessMusic.play();
-                this.app.levelOneVictoryMusic.stop();
+                this.app.levelVictoryMusic.stop();
                 this.app.welcomeMusic.stop();
             }
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && !this.app.saveData.getSaveData().getBoolean("levelThree")) {
@@ -440,7 +440,7 @@ public class MainMenu implements Screen {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelFour")) {
                 this.states = States.LOADING_LEVEL4;
                 this.app.accessMusic.play();
-                this.app.levelOneVictoryMusic.stop();
+                this.app.levelVictoryMusic.stop();
                 this.app.welcomeMusic.stop();
             }
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && !this.app.saveData.getSaveData().getBoolean("levelFour")) {
@@ -468,7 +468,7 @@ public class MainMenu implements Screen {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelFive")) {
                 this.states = States.LOADING_LEVEL5;
                 this.app.welcomeMusic.stop();
-                this.app.levelOneVictoryMusic.stop();
+                this.app.levelVictoryMusic.stop();
                 this.app.accessMusic.play();
                 this.app.welcomeMusic.stop();
             }
@@ -498,7 +498,7 @@ public class MainMenu implements Screen {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelSix")) {
                 this.states = States.LOADING_LEVEL6;
                 this.app.welcomeMusic.stop();
-                this.app.levelOneVictoryMusic.stop();
+                this.app.levelVictoryMusic.stop();
                 this.app.accessMusic.play();
                 this.app.welcomeMusic.stop();
             }
@@ -528,7 +528,7 @@ public class MainMenu implements Screen {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelSeven")) {
                 this.states = States.LOADING_LEVEL7;
                 this.app.welcomeMusic.stop();
-                this.app.levelOneVictoryMusic.stop();
+                this.app.levelVictoryMusic.stop();
                 this.app.accessMusic.play();
                 this.app.welcomeMusic.stop();
             }
@@ -558,7 +558,7 @@ public class MainMenu implements Screen {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelEight")) {
                 this.states = States.LOADING_LEVEL8;
                 this.app.welcomeMusic.stop();
-                this.app.levelOneVictoryMusic.stop();
+                this.app.levelVictoryMusic.stop();
                 this.app.accessMusic.play();
                 this.app.welcomeMusic.stop();
             }
@@ -588,7 +588,7 @@ public class MainMenu implements Screen {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelNine")) {
                 this.states = States.LOADING_LEVEL9;
                 this.app.welcomeMusic.stop();
-                this.app.levelOneVictoryMusic.stop();
+                this.app.levelVictoryMusic.stop();
                 this.app.accessMusic.play();
                 this.app.welcomeMusic.stop();
             }
@@ -618,7 +618,7 @@ public class MainMenu implements Screen {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelFinal")) {
                 this.states = States.LOADING_LEVEL_FINAL;
                 this.app.welcomeMusic.stop();
-                this.app.levelOneVictoryMusic.stop();
+                this.app.levelVictoryMusic.stop();
                 this.app.accessMusic.play();
                 this.app.welcomeMusic.stop();
             }

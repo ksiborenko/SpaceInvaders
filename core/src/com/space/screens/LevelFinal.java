@@ -11,6 +11,11 @@ public class LevelFinal extends LevelSeven implements Screen {
     }
 
     @Override
+    protected void levelVictoryMusic() {
+        this.app.finalVictoryMusic.play();
+    }
+
+    @Override
     protected void shootingLevels() {
         this.bigInvaderBulletManager.shootingLevelFinal(this.rayHandler, this.bigInvaderManager.getInvaders());
     }

@@ -21,7 +21,8 @@ public class App extends Game {
     public Music welcomeMusic;
     public Music buttonSound;
     public Music levelMusic;
-    public Music levelOneVictoryMusic;
+    public Music levelVictoryMusic;
+    public Music finalVictoryMusic;
 
 
     @Override
@@ -35,9 +36,10 @@ public class App extends Game {
         this.welcomeMusic = Gdx.audio.newMusic(Gdx.files.internal("music/welcomeMusic1.mp3"));
         this.buttonSound = Gdx.audio.newMusic(Gdx.files.internal("music/sound2.mp3"));
         this.levelMusic = Gdx.audio.newMusic(Gdx.files.internal("music/levelMusic.mp3"));
-        this.levelOneVictoryMusic = Gdx.audio.newMusic(Gdx.files.internal("music/victoryMusic.mp3"));
+        this.levelVictoryMusic = Gdx.audio.newMusic(Gdx.files.internal("music/victoryMusic.mp3"));
+        this.finalVictoryMusic = Gdx.audio.newMusic(Gdx.files.internal("music/finalVictoryMusic.mp3"));
 
-        this.setScreen(new MainMenu(this));
+        this.setScreen(new LevelFinal(this));
 
 
     }
@@ -59,7 +61,7 @@ public class App extends Game {
         welcomeMusic.dispose();
         buttonSound.dispose();
         levelMusic.dispose();
-        levelOneVictoryMusic.dispose();
+        levelVictoryMusic.dispose();
 
     }
 }

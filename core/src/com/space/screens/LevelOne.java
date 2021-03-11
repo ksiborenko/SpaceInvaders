@@ -50,7 +50,6 @@ public class LevelOne implements Screen {
         this.backgroundPosition1 = new Vector2(0, 0);
         this.backgroundPosition2 = new Vector2(0, App.HEIGHT);
         this.app.levelMusic.play();
-    //    this.app.levelMusic.play();
         this.app.levelMusic.setLooping(true);
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, App.WIDTH, App.HEIGHT);
@@ -96,16 +95,16 @@ public class LevelOne implements Screen {
         this.collisionDetector.invaderBulletDefender1(this.invaderBulletManager.getInvaderBullets1(), this.defenderManager.getDefenders());
         this.collisionDetector.invaderBulletDefender2(this.invaderBulletManager.getInvaderBullets2(), this.defenderManager.getDefenders());
         this.collisionDetector.invaderBulletDefender3(this.invaderBulletManager.getInvaderBullets3(), this.defenderManager.getDefenders());
-        this.collisionDetector.invaderBulletShip1(this.invaderBulletManager.getInvaderBullets1(), this.ship);
-        this.collisionDetector.invaderBulletShip2(this.invaderBulletManager.getInvaderBullets2(), this.ship);
-        this.collisionDetector.invaderBulletShip3(this.invaderBulletManager.getInvaderBullets3(), this.ship);
+//        this.collisionDetector.invaderBulletShip1(this.invaderBulletManager.getInvaderBullets1(), this.ship);
+//        this.collisionDetector.invaderBulletShip2(this.invaderBulletManager.getInvaderBullets2(), this.ship);
+//        this.collisionDetector.invaderBulletShip3(this.invaderBulletManager.getInvaderBullets3(), this.ship);
         if (collisionDetector.isGameOver()) {
             this.app.levelMusic.dispose();
             app.setScreen(new Laugh(app));
         }
         if (this.collisionDetector.getInvadersLeft() == 0) {
             this.app.setScreen(new MainMenu(this.app));
-            this.app.levelOneVictoryMusic.play();
+            this.levelVictoryMusic();
             this.gameSave();
             this.app.saveData.getSaveData().flush();
             this.app.levelMusic.dispose();
@@ -114,6 +113,9 @@ public class LevelOne implements Screen {
         this.reposition();
 
 
+    }
+    protected void levelVictoryMusic () {
+        this.app.levelVictoryMusic.play();
     }
 
     private void update() {
