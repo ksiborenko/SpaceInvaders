@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.space.screens.*;
+import com.space.screens.LevelFinal;
 import com.space.utils.SaveData;
 
 
@@ -23,8 +23,8 @@ public class App extends Game {
     public Music levelMusic;
     public Music levelVictoryMusic;
     public Music finalVictoryMusic;
-   public Music horn;
-   public Music charge;
+    public Music horn;
+    public Music charge;
 
 
     @Override
@@ -44,28 +44,26 @@ public class App extends Game {
         this.charge = Gdx.audio.newMusic(Gdx.files.internal("charge.mp3"));
 
         this.setScreen(new LevelFinal(this));
-
-
     }
 
     @Override
     public void render() {
         super.render();
-
-
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        accessGranted.dispose();
-        resetDataVoice.dispose();
-        accessDenied.dispose();
-        accessMusic.dispose();
-        welcomeMusic.dispose();
-        buttonSound.dispose();
-        levelMusic.dispose();
-        levelVictoryMusic.dispose();
-
+        this.accessGranted.dispose();
+        this.resetDataVoice.dispose();
+        this.accessDenied.dispose();
+        this.accessMusic.dispose();
+        this.welcomeMusic.dispose();
+        this.buttonSound.dispose();
+        this.levelMusic.dispose();
+        this.levelVictoryMusic.dispose();
+        this.horn.dispose();
+        this.charge.dispose();
+        this.batch.dispose();
     }
 }
