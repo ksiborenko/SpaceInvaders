@@ -39,7 +39,7 @@ public class App extends Game {
         this.levelOneVictoryMusic = Gdx.audio.newMusic(Gdx.files.internal("music/victoryLevelMusic.mp3"));
         this.accessMusicLevelTwo = Gdx.audio.newMusic(Gdx.files.internal("music/accessMusicLevelTwo.mp3"));
 
-        this.setScreen(new LevelFinal(this));
+        this.setScreen(new WelcomeScreen(this));
 
 
     }

@@ -137,6 +137,21 @@ public class CollisionDetector {
         }
     }
 
+    public void invaderDefender(Invader[][] invaders, Array<Defender> defenders) {
+        for (int row = 0; row < invaders.length; row++) {
+            for (int column = 0; column < invaders[row].length; column++) {
+                for (int defenderIndex = 0; defenderIndex < defenders.size; defenderIndex++) {
+                    if (invaders[row][column] != null &&
+                            invaders[row][column].getRectangle().overlaps(defenders.get(defenderIndex).getRectangle())) {
+                        this.explosion.play(0.4f);
+                        this.gameOver = true;
+                    }
+                }
+            }
+        }
+
+    }
+
     public boolean isGameOver() {
         return gameOver;
     }
