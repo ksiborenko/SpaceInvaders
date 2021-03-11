@@ -383,7 +383,7 @@ public class MainMenu implements Screen {
             }
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelTwo")) {
                 this.states = States.LOADING_LEVEL2;
-                this.app.accessMusicLevelTwo.play();
+                this.app.accessMusic.play();
                 this.app.levelOneVictoryMusic.stop();
                 this.app.welcomeMusic.stop();
             }
@@ -394,7 +394,7 @@ public class MainMenu implements Screen {
             this.levelTwoLight.setColor(Color.BLACK);
             this.levelTwoButtonSoundTimer = 0;
         }
-        if (this.states == States.LOADING_LEVEL2 && !this.app.accessMusicLevelTwo.isPlaying())
+        if (this.states == States.LOADING_LEVEL2 && !this.app.accessMusic.isPlaying())
             this.app.setScreen(new LevelTwo(this.app));
     }
 
@@ -411,7 +411,7 @@ public class MainMenu implements Screen {
             }
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelThree")) {
                 this.states = States.LOADING_LEVEL3;
-                this.app.accessMusicLevelTwo.play();
+                this.app.accessMusic.play();
                 this.app.levelOneVictoryMusic.stop();
                 this.app.welcomeMusic.stop();
             }
@@ -422,7 +422,7 @@ public class MainMenu implements Screen {
             this.levelThreeLight.setColor(Color.BLACK);
             this.levelThreeButtonSoundTimer = 0;
         }
-        if (this.states == States.LOADING_LEVEL3 && !this.app.accessMusicLevelTwo.isPlaying())
+        if (this.states == States.LOADING_LEVEL3 && !this.app.accessMusic.isPlaying())
             this.app.setScreen(new LevelThree(this.app));
     }
 
@@ -439,7 +439,7 @@ public class MainMenu implements Screen {
             }
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && this.app.saveData.getSaveData().getBoolean("levelFour")) {
                 this.states = States.LOADING_LEVEL4;
-                this.app.accessMusicLevelTwo.play();
+                this.app.accessMusic.play();
                 this.app.levelOneVictoryMusic.stop();
                 this.app.welcomeMusic.stop();
             }
@@ -450,7 +450,7 @@ public class MainMenu implements Screen {
             this.levelFourLight.setColor(Color.BLACK);
             this.levelFourButtonSoundTimer = 0;
         }
-        if (this.states == States.LOADING_LEVEL4 && !this.app.accessMusicLevelTwo.isPlaying())
+        if (this.states == States.LOADING_LEVEL4 && !this.app.accessMusic.isPlaying())
             this.app.setScreen(new LevelFour(this.app));
     }
 

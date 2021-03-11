@@ -50,7 +50,7 @@ public class LevelOne implements Screen {
         this.backgroundPosition1 = new Vector2(0, 0);
         this.backgroundPosition2 = new Vector2(0, App.HEIGHT);
         this.app.levelMusic.play();
-        this.app.levelMusic.play();
+    //    this.app.levelMusic.play();
         this.app.levelMusic.setLooping(true);
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, App.WIDTH, App.HEIGHT);
