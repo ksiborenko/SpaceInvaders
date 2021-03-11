@@ -1,0 +1,17 @@
+package com.space.screens;
+
+import com.badlogic.gdx.Screen;
+import com.space.App;
+
+public class LevelFinal extends LevelSeven implements Screen {
+
+    public LevelFinal(App app) {
+        super(app);
+        this.invaderBulletManager.setInvadersBulletsAmount(4);
+    }
+
+    @Override
+    protected void shootingLevels() {
+        this.bigInvaderBulletManager.shootingLevelFinal(this.rayHandler, this.bigInvaderManager.getInvaders());
+    }
+}
