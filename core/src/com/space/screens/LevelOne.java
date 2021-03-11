@@ -104,17 +104,20 @@ public class LevelOne implements Screen {
         }
         if (this.collisionDetector.getInvadersLeft() == 0) {
             this.app.setScreen(new MainMenu(this.app));
-            this.levelVictoryMusic();
-            this.gameSave();
             this.app.saveData.getSaveData().flush();
             this.app.levelMusic.dispose();
+            this.app.charge.dispose();
+            this.app.horn.dispose();
+            this.levelVictoryMusic();
+            this.gameSave();
         }
         this.update();
         this.reposition();
 
 
     }
-    protected void levelVictoryMusic () {
+
+    protected void levelVictoryMusic() {
         this.app.levelVictoryMusic.play();
     }
 

@@ -15,7 +15,7 @@ public class LevelSeven extends LevelThree implements Screen {
         super(app);
         this.invaderBulletManager.setInvadersBulletsAmount(3);
         this.bigInvaderManager = new BigInvaderManager(this.rayHandler);
-        this.bigInvaderBulletManager = new BigInvaderBulletManager();
+        this.bigInvaderBulletManager = new BigInvaderBulletManager(app);
     }
 
     @Override

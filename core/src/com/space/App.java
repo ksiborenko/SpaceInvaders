@@ -23,6 +23,8 @@ public class App extends Game {
     public Music levelMusic;
     public Music levelVictoryMusic;
     public Music finalVictoryMusic;
+   public Music horn;
+   public Music charge;
 
 
     @Override
@@ -38,6 +40,8 @@ public class App extends Game {
         this.levelMusic = Gdx.audio.newMusic(Gdx.files.internal("music/levelMusic.mp3"));
         this.levelVictoryMusic = Gdx.audio.newMusic(Gdx.files.internal("music/victoryMusic.mp3"));
         this.finalVictoryMusic = Gdx.audio.newMusic(Gdx.files.internal("music/finalVictoryMusic.mp3"));
+        this.horn = Gdx.audio.newMusic(Gdx.files.internal("horn.mp3"));
+        this.charge = Gdx.audio.newMusic(Gdx.files.internal("charge.mp3"));
 
         this.setScreen(new LevelFinal(this));
 

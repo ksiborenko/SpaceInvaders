@@ -2,9 +2,9 @@ package com.space.gamemanagers.bullets;
 
 import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.space.App;
 import com.space.gamemanagers.BigInvaderManager;
 import com.space.sprites.BigInvader;
 import com.space.sprites.bullets.BigInvaderBullet;
@@ -14,6 +14,7 @@ import java.util.Random;
 
 public class BigInvaderBulletManager {
 
+    private final App app;
     private final Array<BigInvaderBullet> bullets;
     private float timeStart;
     private BigInvader invaderFirst;
@@ -25,12 +26,11 @@ public class BigInvaderBulletManager {
     private float tempSpeedThirdInvader;
     private float tempSpeedFourthInvader;
     private States invaderState;
-    private final Music horn;
-    private final Music charge;
+
     private final Random random;
 
 
-    public BigInvaderBulletManager() {
+    public BigInvaderBulletManager(App app) {
         timeStart = 0;
         invaderFirst = null;
         invaderSecond = null;
@@ -40,9 +40,9 @@ public class BigInvaderBulletManager {
         tempSpeedSecondInvader = 0;
         tempSpeedThirdInvader = 0;
         tempSpeedFourthInvader = 0;
+        this.app = app;
         this.bullets = new Array<>();
-        this.horn = Gdx.audio.newMusic(Gdx.files.internal("horn.mp3"));
-        this.charge = Gdx.audio.newMusic(Gdx.files.internal("charge.mp3"));
+
         this.random = new Random();
         this.invaderState = States.NEUTRAL;
     }
@@ -67,25 +67,25 @@ public class BigInvaderBulletManager {
             this.invaderFirst = invaders.get(this.random.nextInt(BigInvaderManager.INVADERS_COUNT));
             this.tempSpeedFirstInvader = this.invaderFirst.returnSpeed();
             this.invaderState = States.CHARGING;
-            this.charge.play();
+            this.app.charge.play();
         }
-        if (this.invaderState == States.CHARGING && this.charge.isPlaying()) {
+        if (this.invaderState == States.CHARGING && this.app.charge.isPlaying()) {
             this.invaderFirst.setSPeed(0);
-            this.charge.setLooping(false);
-            this.charge.setVolume(0.6f);
+            this.app.charge.setLooping(false);
+            this.app.charge.setVolume(0.8f);
             this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
 
         }
-        if (this.invaderState == States.CHARGING && !this.charge.isPlaying()) {
-            this.horn.play();
-            this.horn.setVolume(0.6f);
+        if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
+            this.app.horn.play();
+            this.app.horn.setVolume(0.6f);
             this.invaderState = States.SHOOTING;
         }
-        if (this.invaderState == States.SHOOTING && this.horn.isPlaying()) {
+        if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
             this.invaderFirst.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
             this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderFirst));
         }
-        if (this.invaderState == States.SHOOTING && !this.horn.isPlaying()) {
+        if (this.invaderState == States.SHOOTING && !this.app.horn.isPlaying()) {
             this.invaderFirst.setSPeed(this.tempSpeedFirstInvader);
             this.invaderState = States.NEUTRAL;
             this.timeStart = 0;
@@ -110,29 +110,29 @@ public class BigInvaderBulletManager {
                 this.tempSpeedSecondInvader = this.invaderSecond.returnSpeed();
                 this.invaderState = States.CHARGING;
             }
-            this.charge.play();
+            this.app.charge.play();
         }
-        if (this.invaderState == States.CHARGING && this.charge.isPlaying()) {
+        if (this.invaderState == States.CHARGING && this.app.charge.isPlaying()) {
             this.invaderFirst.setSPeed(0);
             this.invaderSecond.setSPeed(0);
-            this.charge.setLooping(false);
-            this.charge.setVolume(0.6f);
+            this.app.charge.setLooping(false);
+            this.app.charge.setVolume(0.8f);
             this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
             this.invaderSecond.setBrighterLight(this.invaderSecond.getBigInvaderLight());
 
         }
-        if (this.invaderState == States.CHARGING && !this.charge.isPlaying()) {
-            this.horn.play();
-            this.horn.setVolume(0.6f);
+        if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
+            this.app.horn.play();
+            this.app.horn.setVolume(0.6f);
             this.invaderState = States.SHOOTING;
         }
-        if (this.invaderState == States.SHOOTING && this.horn.isPlaying()) {
+        if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
             this.invaderFirst.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
             this.invaderSecond.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
             this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderFirst));
             this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderSecond));
         }
-        if (this.invaderState == States.SHOOTING && !this.horn.isPlaying()) {
+        if (this.invaderState == States.SHOOTING && !this.app.horn.isPlaying()) {
             this.invaderFirst.setSPeed(this.tempSpeedFirstInvader);
             this.invaderSecond.setSPeed(this.tempSpeedSecondInvader);
             this.invaderState = States.NEUTRAL;
@@ -166,25 +166,25 @@ public class BigInvaderBulletManager {
                 this.tempSpeedThirdInvader = this.invaderThird.returnSpeed();
                 this.invaderState = States.CHARGING;
             }
-            this.charge.play();
+            this.app.charge.play();
         }
-        if (this.invaderState == States.CHARGING && this.charge.isPlaying()) {
+        if (this.invaderState == States.CHARGING && this.app.charge.isPlaying()) {
             this.invaderFirst.setSPeed(0);
             this.invaderSecond.setSPeed(0);
             this.invaderThird.setSPeed(0);
-            this.charge.setLooping(false);
-            this.charge.setVolume(0.6f);
+            this.app.charge.setLooping(false);
+            this.app.charge.setVolume(0.8f);
             this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
             this.invaderSecond.setBrighterLight(this.invaderSecond.getBigInvaderLight());
             this.invaderThird.setBrighterLight(this.invaderThird.getBigInvaderLight());
 
         }
-        if (this.invaderState == States.CHARGING && !this.charge.isPlaying()) {
-            this.horn.play();
-            this.horn.setVolume(0.6f);
+        if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
+            this.app.horn.play();
+            this.app.horn.setVolume(0.6f);
             this.invaderState = States.SHOOTING;
         }
-        if (this.invaderState == States.SHOOTING && this.horn.isPlaying()) {
+        if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
             this.invaderFirst.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
             this.invaderSecond.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
             this.invaderThird.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
@@ -192,7 +192,7 @@ public class BigInvaderBulletManager {
             this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderSecond));
             this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderThird));
         }
-        if (this.invaderState == States.SHOOTING && !this.horn.isPlaying()) {
+        if (this.invaderState == States.SHOOTING && !this.app.horn.isPlaying()) {
             this.invaderFirst.setSPeed(this.tempSpeedFirstInvader);
             this.invaderSecond.setSPeed(this.tempSpeedSecondInvader);
             this.invaderThird.setSPeed(this.tempSpeedThirdInvader);
@@ -220,27 +220,27 @@ public class BigInvaderBulletManager {
             this.tempSpeedThirdInvader = this.invaderThird.returnSpeed();
             this.tempSpeedFourthInvader = this.invaderFourth.returnSpeed();
             this.invaderState = States.CHARGING;
-            this.charge.play();
+            this.app.charge.play();
         }
-        if (this.invaderState == States.CHARGING && this.charge.isPlaying()) {
+        if (this.invaderState == States.CHARGING && this.app.charge.isPlaying()) {
             this.invaderFirst.setSPeed(0);
             this.invaderSecond.setSPeed(0);
             this.invaderThird.setSPeed(0);
             this.invaderFourth.setSPeed(0);
-            this.charge.setLooping(false);
-            this.charge.setVolume(0.6f);
+            this.app.charge.setLooping(false);
+            this.app.charge.setVolume(0.9f);
             this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
             this.invaderSecond.setBrighterLight(this.invaderSecond.getBigInvaderLight());
             this.invaderThird.setBrighterLight(this.invaderThird.getBigInvaderLight());
             this.invaderFourth.setBrighterLight(this.invaderFourth.getBigInvaderLight());
 
         }
-        if (this.invaderState == States.CHARGING && !this.charge.isPlaying()) {
-            this.horn.play();
-            this.horn.setVolume(0.6f);
+        if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
+            this.app.horn.play();
+            this.app.horn.setVolume(0.6f);
             this.invaderState = States.SHOOTING;
         }
-        if (this.invaderState == States.SHOOTING && this.horn.isPlaying()) {
+        if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
             this.invaderFirst.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
             this.invaderSecond.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
             this.invaderThird.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
@@ -250,7 +250,7 @@ public class BigInvaderBulletManager {
             this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderThird));
             this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderFourth));
         }
-        if (this.invaderState == States.SHOOTING && !this.horn.isPlaying()) {
+        if (this.invaderState == States.SHOOTING && !this.app.horn.isPlaying()) {
             this.invaderFirst.setSPeed(this.tempSpeedFirstInvader);
             this.invaderSecond.setSPeed(this.tempSpeedSecondInvader);
             this.invaderThird.setSPeed(this.tempSpeedThirdInvader);
