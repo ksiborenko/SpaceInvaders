@@ -60,7 +60,6 @@ public class MainMenu implements Screen {
     private final Texture levelFinalButtonTexture;
     private final Texture levelFinalButtonTextureInactive;
 
-
     private final Texture resetKillsButtonTexture;
     private final Texture resetKillsButtonTextureInactive;
     private final Texture resetSavesButtonTexture;

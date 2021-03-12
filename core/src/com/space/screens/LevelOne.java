@@ -32,16 +32,15 @@ public class LevelOne implements Screen {
     protected Lights lights;
 
     private final Texture background;
+
     private final Vector2 backgroundPosition1;
     private final Vector2 backgroundPosition2;
-
 
     private final World world;
     private final Box2DDebugRenderer renderer;
     private final OrthographicCamera camera;
     private final ShipBulletManager shipBulletManager;
     private final DefenderManager defenderManager;
-
     private final Hud hud;
 
     public LevelOne(App app) {

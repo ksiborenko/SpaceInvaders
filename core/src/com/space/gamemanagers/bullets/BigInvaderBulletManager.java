@@ -25,24 +25,28 @@ public class BigInvaderBulletManager {
     private float tempSpeedSecondInvader;
     private float tempSpeedThirdInvader;
     private float tempSpeedFourthInvader;
+    private final float timeEvent;
+    private final float chargeVolume;
+    private final float hornVolume;
     private States invaderState;
-
     private final Random random;
 
 
     public BigInvaderBulletManager(App app) {
-        timeStart = 0;
-        invaderFirst = null;
-        invaderSecond = null;
-        invaderThird = null;
-        invaderFourth = null;
-        tempSpeedFirstInvader = 0;
-        tempSpeedSecondInvader = 0;
-        tempSpeedThirdInvader = 0;
-        tempSpeedFourthInvader = 0;
+        this.timeStart = 0;
+        this.invaderFirst = null;
+        this.invaderSecond = null;
+        this.invaderThird = null;
+        this.invaderFourth = null;
+        this.tempSpeedFirstInvader = 0;
+        this.tempSpeedSecondInvader = 0;
+        this.tempSpeedThirdInvader = 0;
+        this.tempSpeedFourthInvader = 0;
+        this.chargeVolume = 1f;
+        this.hornVolume = 0.7f;
+        this.timeEvent = 5f;
         this.app = app;
         this.bullets = new Array<>();
-
         this.random = new Random();
         this.invaderState = States.NEUTRAL;
     }
@@ -59,7 +63,6 @@ public class BigInvaderBulletManager {
 
     public void shootingLevelSeven(RayHandler rayHandler, Array<BigInvader> invaders) {
         this.timeStart += Gdx.graphics.getDeltaTime();
-        float timeEvent = 5f;
         if (this.invaderState == States.NEUTRAL && this.timeStart >= timeEvent) {
             this.invaderState = States.PICKING_INVADER;
         }
@@ -72,13 +75,13 @@ public class BigInvaderBulletManager {
         if (this.invaderState == States.CHARGING && this.app.charge.isPlaying()) {
             this.invaderFirst.setSPeed(0);
             this.app.charge.setLooping(false);
-            this.app.charge.setVolume(0.8f);
+            this.app.charge.setVolume(this.chargeVolume);
             this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
 
         }
         if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
             this.app.horn.play();
-            this.app.horn.setVolume(0.6f);
+            this.app.horn.setVolume(this.hornVolume);
             this.invaderState = States.SHOOTING;
         }
         if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
@@ -95,7 +98,6 @@ public class BigInvaderBulletManager {
     public void shootingLevelEight(RayHandler rayHandler, Array<BigInvader> invaders) {
         this.timeStart += Gdx.graphics.getDeltaTime();
         BigInvader tempInvader;
-        float timeEvent = 5f;
         if (this.invaderState == States.NEUTRAL && this.timeStart >= timeEvent) {
             this.invaderState = States.PICKING_INVADER;
         }
@@ -116,14 +118,14 @@ public class BigInvaderBulletManager {
             this.invaderFirst.setSPeed(0);
             this.invaderSecond.setSPeed(0);
             this.app.charge.setLooping(false);
-            this.app.charge.setVolume(0.8f);
+            this.app.charge.setVolume(this.chargeVolume);
             this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
             this.invaderSecond.setBrighterLight(this.invaderSecond.getBigInvaderLight());
 
         }
         if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
             this.app.horn.play();
-            this.app.horn.setVolume(0.6f);
+            this.app.horn.setVolume(this.hornVolume);
             this.invaderState = States.SHOOTING;
         }
         if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
@@ -146,7 +148,6 @@ public class BigInvaderBulletManager {
         this.timeStart += Gdx.graphics.getDeltaTime();
         BigInvader tempInvaderSecond;
         BigInvader tempInvaderThird;
-        float timeEvent = 5f;
         if (this.invaderState == States.NEUTRAL && this.timeStart >= timeEvent) {
             this.invaderState = States.PICKING_INVADER;
         }
@@ -173,7 +174,7 @@ public class BigInvaderBulletManager {
             this.invaderSecond.setSPeed(0);
             this.invaderThird.setSPeed(0);
             this.app.charge.setLooping(false);
-            this.app.charge.setVolume(0.8f);
+            this.app.charge.setVolume(this.chargeVolume);
             this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
             this.invaderSecond.setBrighterLight(this.invaderSecond.getBigInvaderLight());
             this.invaderThird.setBrighterLight(this.invaderThird.getBigInvaderLight());
@@ -181,7 +182,7 @@ public class BigInvaderBulletManager {
         }
         if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
             this.app.horn.play();
-            this.app.horn.setVolume(0.6f);
+            this.app.horn.setVolume(this.hornVolume);
             this.invaderState = States.SHOOTING;
         }
         if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
@@ -206,7 +207,6 @@ public class BigInvaderBulletManager {
 
     public void shootingLevelFinal(RayHandler rayHandler, Array<BigInvader> invaders) {
         this.timeStart += Gdx.graphics.getDeltaTime();
-        float timeEvent = 5f;
         if (this.invaderState == States.NEUTRAL && this.timeStart >= timeEvent) {
             this.invaderState = States.PICKING_INVADER;
         }
@@ -228,7 +228,7 @@ public class BigInvaderBulletManager {
             this.invaderThird.setSPeed(0);
             this.invaderFourth.setSPeed(0);
             this.app.charge.setLooping(false);
-            this.app.charge.setVolume(0.9f);
+            this.app.charge.setVolume(this.chargeVolume);
             this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
             this.invaderSecond.setBrighterLight(this.invaderSecond.getBigInvaderLight());
             this.invaderThird.setBrighterLight(this.invaderThird.getBigInvaderLight());
@@ -237,7 +237,7 @@ public class BigInvaderBulletManager {
         }
         if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
             this.app.horn.play();
-            this.app.horn.setVolume(0.6f);
+            this.app.horn.setVolume(this.hornVolume);
             this.invaderState = States.SHOOTING;
         }
         if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {

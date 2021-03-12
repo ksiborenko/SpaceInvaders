@@ -32,6 +32,12 @@ public class Laugh implements Screen {
     }
 
     @Override
+    public void dispose() {
+        this.background.dispose();
+        this.laugh.dispose();
+    }
+
+    @Override
     public void show() {
 
     }
@@ -53,11 +59,6 @@ public class Laugh implements Screen {
 
     @Override
     public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
 
     }
 }

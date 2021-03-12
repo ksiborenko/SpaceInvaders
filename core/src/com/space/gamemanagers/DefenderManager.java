@@ -14,8 +14,8 @@ public class DefenderManager {
 
 
     public DefenderManager(RayHandler rayHandler) {
-        defenderSpeed = 1;
         this.defenders = new Array<>();
+        this.defenderSpeed = 1;
         int defenderSize = 4;
         for (int defenderIndex = 0; defenderIndex < defenderSize; defenderIndex++) {
             int defenderSpacing = 300;

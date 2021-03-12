@@ -61,13 +61,14 @@ public class WelcomeScreen implements Screen {
         this.renderer = new Box2DDebugRenderer();
         this.rayHandler = new RayHandler(this.world);
         this.rayHandler.setCombinedMatrix(this.camera);
-        this.beginBtnLight = new PointLight(rayHandler, 80, Color.RED, 150, this.beginBtnPosition.x + (float) this.beginBtnTexture.getWidth() / 2,
+        int rays = 80;
+        this.beginBtnLight = new PointLight(rayHandler, rays, Color.RED, 150, this.beginBtnPosition.x + (float) this.beginBtnTexture.getWidth() / 2,
                 this.beginBtnPosition.y + this.beginBtnTexture.getHeight());
-        this.leaveBtnLight = new PointLight(rayHandler, 80, Color.RED, 150, this.leaveBtnPosition.x + (float) this.leaveBtnTexture.getWidth() / 2,
+        this.leaveBtnLight = new PointLight(rayHandler, rays, Color.RED, 150, this.leaveBtnPosition.x + (float) this.leaveBtnTexture.getWidth() / 2,
                 this.leaveBtnPosition.y + this.leaveBtnTexture.getHeight());
-        this.logoLight = new PointLight(rayHandler, 80, Color.BLACK, 1000, this.logoPosition.x + (float) this.logo.getWidth() / 2,
+        this.logoLight = new PointLight(rayHandler, rays, Color.BLACK, 1000, this.logoPosition.x + (float) this.logo.getWidth() / 2,
                 this.logoPosition.y + this.logo.getHeight());
-        new PointLight(rayHandler, 80, Color.BLACK, 1000, (float) App.WIDTH / 2, (float) App.HEIGHT / 2);
+        new PointLight(rayHandler, rays, Color.BLACK, 1000, (float) App.WIDTH / 2, (float) App.HEIGHT / 2);
 
     }
 

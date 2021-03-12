@@ -9,7 +9,6 @@ public class InvaderManager {
 
     public static final int INVADERS_ROWS = 5;
     public static final int INVADERS_COLUMNS = 16;
-    public static final int INVADERS_SPACING = 50;
     private final Invader[][] invaders;
 
 
@@ -19,9 +18,10 @@ public class InvaderManager {
             for (int column = 0; column < this.invaders[row].length; column++) {
                 int invadersLeftBeginning = 100;
                 int invadersTopPositionCorrection = 80;
+                int invadersSpacing = 50;
                 this.invaders[row][column] = new Invader(rayHandler,
-                        invadersLeftBeginning + column * InvaderManager.INVADERS_SPACING,
-                        App.HEIGHT / 3 * 2 - invadersTopPositionCorrection + row * InvaderManager.INVADERS_SPACING);
+                        invadersLeftBeginning + column * invadersSpacing,
+                        App.HEIGHT / 3 * 2 - invadersTopPositionCorrection + row * invadersSpacing);
             }
         }
     }
