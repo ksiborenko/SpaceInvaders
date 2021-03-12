@@ -12,7 +12,6 @@ import com.space.App;
 public class BigInvader {
 
     public static final int INVADER_LIGHT_DISTANCE = 190;
-
     private float speed;
 
     private final Texture bigInvaderTexture;

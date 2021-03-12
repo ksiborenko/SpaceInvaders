@@ -15,7 +15,6 @@ public enum States {
     LOADING_LEVEL_FINAL,
 
     //BigInvadersBulletManager
-
     NEUTRAL,
     PICKING_INVADER,
     CHARGING,

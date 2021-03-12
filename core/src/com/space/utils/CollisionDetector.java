@@ -16,6 +16,7 @@ public class CollisionDetector {
 
     private final App app;
     private final Sound explosion;
+    private final float explosionVolume;
     private boolean gameOver = false;
     private int invadersLeft;
     private int invadersKilled;
@@ -23,8 +24,9 @@ public class CollisionDetector {
 
     public CollisionDetector(App app) {
         this.app = app;
+        this.explosionVolume = 0.4f;
         this.explosion = Gdx.audio.newSound(Gdx.files.internal("explosion.mp3"));
-        invadersLeft = InvaderManager.INVADERS_ROWS * InvaderManager.INVADERS_COLUMNS;
+        this.invadersLeft = InvaderManager.INVADERS_ROWS * InvaderManager.INVADERS_COLUMNS;
         this.invadersKilled = this.app.saveData.getInvadersKilledCount();
 
     }
@@ -35,7 +37,7 @@ public class CollisionDetector {
                 for (int bulletIndex = 0; bulletIndex < bullets.size; bulletIndex++) {
                     if (invaders[row][column] != null &&
                             bullets.get(bulletIndex).getBulletRectangle().overlaps(invaders[row][column].getRectangle())) {
-                        this.explosion.play(0.3f);
+                        this.explosion.play(this.explosionVolume);
                         bullets.get(bulletIndex).getBulletLight().remove();
                         invaders[row][column].getInvaderLight().remove();
                         bullets.removeIndex(bulletIndex);
@@ -101,7 +103,7 @@ public class CollisionDetector {
     public void invaderBulletShip1(Array<InvaderBullet> bullets1, Ship ship) {
         for (int bulletIndex = 0; bulletIndex < bullets1.size; bulletIndex++) {
             if (bullets1.get(bulletIndex).getBulletRectangle().overlaps(ship.getRectangle())) {
-                this.explosion.play(0.4f);
+                this.explosion.play(this.explosionVolume);
                 this.gameOver = true;
                 break;
             }
@@ -111,7 +113,7 @@ public class CollisionDetector {
     public void invaderBulletShip2(Array<InvaderBullet> bullets2, Ship ship) {
         for (int bulletIndex = 0; bulletIndex < bullets2.size; bulletIndex++) {
             if (bullets2.get(bulletIndex).getBulletRectangle().overlaps(ship.getRectangle())) {
-                this.explosion.play(0.4f);
+                this.explosion.play(this.explosionVolume);
                 this.gameOver = true;
                 break;
             }
@@ -121,7 +123,7 @@ public class CollisionDetector {
     public void invaderBulletShip3(Array<InvaderBullet> bullets3, Ship ship) {
         for (int bulletIndex = 0; bulletIndex < bullets3.size; bulletIndex++) {
             if (bullets3.get(bulletIndex).getBulletRectangle().overlaps(ship.getRectangle())) {
-                this.explosion.play(0.4f);
+                this.explosion.play(this.explosionVolume);
                 this.gameOver = true;
                 break;
             }
@@ -131,19 +133,19 @@ public class CollisionDetector {
     public void bigLaserShip(Array<BigInvaderBullet> bullets, Ship ship) {
         for (int bulletIndex = 0; bulletIndex < bullets.size; bulletIndex++) {
             if (bullets.get(bulletIndex).getBulletRectangle().overlaps(ship.getRectangle())) {
-                this.explosion.play(0.4f);
+                this.explosion.play(this.explosionVolume);
                 this.gameOver = true;
             }
         }
     }
 
     public void invaderDefender(Invader[][] invaders, Array<Defender> defenders) {
-        for (int row = 0; row < invaders.length; row++) {
-            for (int column = 0; column < invaders[row].length; column++) {
+        for (Invader[] invader : invaders) {
+            for (Invader value : invader) {
                 for (int defenderIndex = 0; defenderIndex < defenders.size; defenderIndex++) {
-                    if (invaders[row][column] != null &&
-                            invaders[row][column].getRectangle().overlaps(defenders.get(defenderIndex).getRectangle())) {
-                        this.explosion.play(0.4f);
+                    if (value != null &&
+                            value.getRectangle().overlaps(defenders.get(defenderIndex).getRectangle())) {
+                        this.explosion.play(this.explosionVolume);
                         this.gameOver = true;
                     }
                 }
