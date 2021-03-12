@@ -12,7 +12,7 @@ public class LevelEight extends LevelSeven implements Screen {
 
     @Override
     protected void shootingLevels() {
-        this.bigInvaderBulletManager.shootingLevelEight(this.rayHandler, this.bigInvaderManager.getInvaders());
+        this.bigInvaderBulletManager.shooting(2, this.rayHandler, this.bigInvaderManager.getInvaders());
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.space.screens.LevelFinal;
+import com.space.screens.LevelNine;
 import com.space.screens.LevelSeven;
 import com.space.screens.WelcomeScreen;
 import com.space.utils.SaveData;
@@ -44,7 +46,7 @@ public class App extends Game {
         this.horn = Gdx.audio.newMusic(Gdx.files.internal("horn.mp3"));
         this.charge = Gdx.audio.newMusic(Gdx.files.internal("charge.mp3"));
 
-        this.setScreen(new LevelSeven(this));
+        this.setScreen(new LevelNine(this));
     }
 
     @Override

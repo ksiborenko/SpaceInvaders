@@ -8,7 +8,8 @@ import com.space.sprites.Defender;
 
 public class DefenderManager {
 
-
+    private static final int DEFENDER_SIZE = 4;
+    private static final int DEFENDER_SPACING = 300;
     private int defenderSpeed;
     private final Array<Defender> defenders;
 
@@ -16,10 +17,8 @@ public class DefenderManager {
     public DefenderManager(RayHandler rayHandler) {
         this.defenders = new Array<>();
         this.defenderSpeed = 1;
-        int defenderSize = 4;
-        for (int defenderIndex = 0; defenderIndex < defenderSize; defenderIndex++) {
-            int defenderSpacing = 300;
-            this.defenders.add(new Defender(rayHandler, defenderIndex * defenderSpacing));
+        for (int defenderIndex = 0; defenderIndex < DEFENDER_SIZE; defenderIndex++) {
+            this.defenders.add(new Defender(rayHandler, defenderIndex * DEFENDER_SPACING));
         }
     }
 

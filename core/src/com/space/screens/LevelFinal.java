@@ -17,6 +17,6 @@ public class LevelFinal extends LevelSeven implements Screen {
 
     @Override
     protected void shootingLevels() {
-        this.bigInvaderBulletManager.shootingLevelFinal(this.rayHandler, this.bigInvaderManager.getInvaders());
+        this.bigInvaderBulletManager.shooting(4,this.rayHandler, this.bigInvaderManager.getInvaders());
     }
 }

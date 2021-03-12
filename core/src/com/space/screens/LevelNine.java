@@ -11,7 +11,7 @@ public class LevelNine extends LevelSeven implements Screen {
 
     @Override
     protected void shootingLevels() {
-        this.bigInvaderBulletManager.shootingLevelNine(this.rayHandler, this.bigInvaderManager.getInvaders());
+        this.bigInvaderBulletManager.shooting(3, this.rayHandler, this.bigInvaderManager.getInvaders());
     }
 
     @Override

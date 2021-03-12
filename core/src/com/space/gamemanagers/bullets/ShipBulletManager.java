@@ -7,11 +7,12 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.space.App;
-import com.space.sprites.bullets.ShipBullet;
 import com.space.sprites.Ship;
+import com.space.sprites.bullets.ShipBullet;
 
 public class ShipBulletManager {
 
+    public static final int MAX_BULLET_AMOUNT = 10;
     private final Array<ShipBullet> bullets;
     private final Sound shot;
     private int bulletsShot;
@@ -31,7 +32,7 @@ public class ShipBulletManager {
     }
 
     public void addBullets(Ship ship, RayHandler rayHandler) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && this.bullets.size<=10) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && this.bullets.size <= MAX_BULLET_AMOUNT) {
             this.bullets.add(new ShipBullet(rayHandler, ship));
             this.bulletsShot++;
             this.shot.play(0.3f);

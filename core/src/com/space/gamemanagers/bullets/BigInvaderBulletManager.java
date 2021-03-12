@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.space.App;
-import com.space.gamemanagers.BigInvaderManager;
 import com.space.sprites.BigInvader;
 import com.space.sprites.bullets.BigInvaderBullet;
 import com.space.utils.States;
@@ -17,14 +16,9 @@ public class BigInvaderBulletManager {
     private final App app;
     private final Array<BigInvaderBullet> bullets;
     private float timeStart;
-    private BigInvader invaderFirst;
-    private BigInvader invaderSecond;
-    private BigInvader invaderThird;
-    private BigInvader invaderFourth;
-    private float tempSpeedFirstInvader;
-    private float tempSpeedSecondInvader;
-    private float tempSpeedThirdInvader;
-    private float tempSpeedFourthInvader;
+
+    private BigInvader[] invaders;
+    private float[] invaderSpeedCache;
     private final float timeEvent;
     private final float chargeVolume;
     private final float hornVolume;
@@ -34,14 +28,8 @@ public class BigInvaderBulletManager {
 
     public BigInvaderBulletManager(App app) {
         this.timeStart = 0;
-        this.invaderFirst = null;
-        this.invaderSecond = null;
-        this.invaderThird = null;
-        this.invaderFourth = null;
-        this.tempSpeedFirstInvader = 0;
-        this.tempSpeedSecondInvader = 0;
-        this.tempSpeedThirdInvader = 0;
-        this.tempSpeedFourthInvader = 0;
+        this.invaders = new BigInvader[4];
+        this.invaderSpeedCache = new float[this.invaders.length];
         this.chargeVolume = 1f;
         this.hornVolume = 0.7f;
         this.timeEvent = 5f;
@@ -61,206 +49,57 @@ public class BigInvaderBulletManager {
         }
     }
 
-    public void shootingLevelSeven(RayHandler rayHandler, Array<BigInvader> invaders) {
+    public void shooting(int numOfShootingInvaders, RayHandler rayHandler, Array<BigInvader> invaders) {
+        if (numOfShootingInvaders > this.invaders.length) {
+            throw new AssertionError("numOfShootingInvaders value exceeded invaders length");
+        }
+
         this.timeStart += Gdx.graphics.getDeltaTime();
         if (this.invaderState == States.NEUTRAL && this.timeStart >= timeEvent) {
             this.invaderState = States.PICKING_INVADER;
         }
         if (this.invaderState == States.PICKING_INVADER) {
-            this.invaderFirst = invaders.get(this.random.nextInt(BigInvaderManager.INVADERS_COUNT));
-            this.tempSpeedFirstInvader = this.invaderFirst.returnSpeed();
+            for (int index = 0; index < numOfShootingInvaders; index++) {
+                BigInvader invader = invaders.get(index);
+                this.invaders[index] = invader;
+                this.invaderSpeedCache[index] = invader.returnSpeed();
+            }
             this.invaderState = States.CHARGING;
             this.app.charge.play();
         }
+
         if (this.invaderState == States.CHARGING && this.app.charge.isPlaying()) {
-            this.invaderFirst.setSPeed(0);
+            for (int index = 0; index < numOfShootingInvaders; index++) {
+                BigInvader invader = this.invaders[index];
+                invader.setSPeed(0);
+                invader.setBrighterLight(invader.getBigInvaderLight());
+            }
             this.app.charge.setLooping(false);
             this.app.charge.setVolume(this.chargeVolume);
-            this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
-
         }
+
         if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
             this.app.horn.play();
             this.app.horn.setVolume(this.hornVolume);
             this.invaderState = States.SHOOTING;
         }
+
         if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
-            this.invaderFirst.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
-            this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderFirst));
+            for (int index = 0; index < numOfShootingInvaders; index++) {
+                BigInvader invader = this.invaders[index];
+                invader.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
+                this.bullets.add(new BigInvaderBullet(rayHandler, invader));
+            }
         }
+
         if (this.invaderState == States.SHOOTING && !this.app.horn.isPlaying()) {
-            this.invaderFirst.setSPeed(this.tempSpeedFirstInvader);
+            for (int index = 0; index < numOfShootingInvaders; index++) {
+                this.invaders[index].setSPeed(this.invaderSpeedCache[index]);
+                this.invaders[index] = null;
+                this.invaderSpeedCache[index] = 0;
+            }
             this.invaderState = States.NEUTRAL;
             this.timeStart = 0;
-        }
-    }
-
-    public void shootingLevelEight(RayHandler rayHandler, Array<BigInvader> invaders) {
-        this.timeStart += Gdx.graphics.getDeltaTime();
-        BigInvader tempInvader;
-        if (this.invaderState == States.NEUTRAL && this.timeStart >= timeEvent) {
-            this.invaderState = States.PICKING_INVADER;
-        }
-        if (this.invaderState == States.PICKING_INVADER) {
-            this.invaderFirst = invaders.get(this.random.nextInt(BigInvaderManager.INVADERS_COUNT));
-            tempInvader = invaders.get(this.random.nextInt(BigInvaderManager.INVADERS_COUNT));
-            if (tempInvader != invaderFirst) {
-                this.invaderSecond = tempInvader;
-            }
-            if (this.invaderFirst != null && this.invaderSecond != null) {
-                this.tempSpeedFirstInvader = this.invaderFirst.returnSpeed();
-                this.tempSpeedSecondInvader = this.invaderSecond.returnSpeed();
-                this.invaderState = States.CHARGING;
-            }
-            this.app.charge.play();
-        }
-        if (this.invaderState == States.CHARGING && this.app.charge.isPlaying()) {
-            this.invaderFirst.setSPeed(0);
-            this.invaderSecond.setSPeed(0);
-            this.app.charge.setLooping(false);
-            this.app.charge.setVolume(this.chargeVolume);
-            this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
-            this.invaderSecond.setBrighterLight(this.invaderSecond.getBigInvaderLight());
-
-        }
-        if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
-            this.app.horn.play();
-            this.app.horn.setVolume(this.hornVolume);
-            this.invaderState = States.SHOOTING;
-        }
-        if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
-            this.invaderFirst.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
-            this.invaderSecond.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
-            this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderFirst));
-            this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderSecond));
-        }
-        if (this.invaderState == States.SHOOTING && !this.app.horn.isPlaying()) {
-            this.invaderFirst.setSPeed(this.tempSpeedFirstInvader);
-            this.invaderSecond.setSPeed(this.tempSpeedSecondInvader);
-            this.invaderState = States.NEUTRAL;
-            this.timeStart = 0;
-            this.invaderFirst = null;
-            this.invaderSecond = null;
-        }
-    }
-
-    public void shootingLevelNine(RayHandler rayHandler, Array<BigInvader> invaders) {
-        this.timeStart += Gdx.graphics.getDeltaTime();
-        BigInvader tempInvaderSecond;
-        BigInvader tempInvaderThird;
-        if (this.invaderState == States.NEUTRAL && this.timeStart >= timeEvent) {
-            this.invaderState = States.PICKING_INVADER;
-        }
-        if (this.invaderState == States.PICKING_INVADER) {
-            this.invaderFirst = invaders.get(this.random.nextInt(BigInvaderManager.INVADERS_COUNT));
-            tempInvaderSecond = invaders.get(this.random.nextInt(BigInvaderManager.INVADERS_COUNT));
-            if (tempInvaderSecond != invaderFirst) {
-                this.invaderSecond = tempInvaderSecond;
-            }
-            tempInvaderThird = invaders.get(this.random.nextInt(BigInvaderManager.INVADERS_COUNT));
-            if (tempInvaderThird != this.invaderFirst && tempInvaderThird != this.invaderSecond) {
-                this.invaderThird = tempInvaderThird;
-            }
-            if (this.invaderFirst != null && this.invaderSecond != null && this.invaderThird != null) {
-                this.tempSpeedFirstInvader = this.invaderFirst.returnSpeed();
-                this.tempSpeedSecondInvader = this.invaderSecond.returnSpeed();
-                this.tempSpeedThirdInvader = this.invaderThird.returnSpeed();
-                this.invaderState = States.CHARGING;
-            }
-            this.app.charge.play();
-        }
-        if (this.invaderState == States.CHARGING && this.app.charge.isPlaying()) {
-            this.invaderFirst.setSPeed(0);
-            this.invaderSecond.setSPeed(0);
-            this.invaderThird.setSPeed(0);
-            this.app.charge.setLooping(false);
-            this.app.charge.setVolume(this.chargeVolume);
-            this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
-            this.invaderSecond.setBrighterLight(this.invaderSecond.getBigInvaderLight());
-            this.invaderThird.setBrighterLight(this.invaderThird.getBigInvaderLight());
-
-        }
-        if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
-            this.app.horn.play();
-            this.app.horn.setVolume(this.hornVolume);
-            this.invaderState = States.SHOOTING;
-        }
-        if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
-            this.invaderFirst.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
-            this.invaderSecond.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
-            this.invaderThird.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
-            this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderFirst));
-            this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderSecond));
-            this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderThird));
-        }
-        if (this.invaderState == States.SHOOTING && !this.app.horn.isPlaying()) {
-            this.invaderFirst.setSPeed(this.tempSpeedFirstInvader);
-            this.invaderSecond.setSPeed(this.tempSpeedSecondInvader);
-            this.invaderThird.setSPeed(this.tempSpeedThirdInvader);
-            this.invaderState = States.NEUTRAL;
-            this.timeStart = 0;
-            this.invaderFirst = null;
-            this.invaderSecond = null;
-            this.invaderThird = null;
-        }
-    }
-
-    public void shootingLevelFinal(RayHandler rayHandler, Array<BigInvader> invaders) {
-        this.timeStart += Gdx.graphics.getDeltaTime();
-        if (this.invaderState == States.NEUTRAL && this.timeStart >= timeEvent) {
-            this.invaderState = States.PICKING_INVADER;
-        }
-        if (this.invaderState == States.PICKING_INVADER) {
-            this.invaderFirst = invaders.get(0);
-            this.invaderSecond = invaders.get(1);
-            this.invaderThird = invaders.get(2);
-            this.invaderFourth = invaders.get(3);
-            this.tempSpeedFirstInvader = this.invaderFirst.returnSpeed();
-            this.tempSpeedSecondInvader = this.invaderSecond.returnSpeed();
-            this.tempSpeedThirdInvader = this.invaderThird.returnSpeed();
-            this.tempSpeedFourthInvader = this.invaderFourth.returnSpeed();
-            this.invaderState = States.CHARGING;
-            this.app.charge.play();
-        }
-        if (this.invaderState == States.CHARGING && this.app.charge.isPlaying()) {
-            this.invaderFirst.setSPeed(0);
-            this.invaderSecond.setSPeed(0);
-            this.invaderThird.setSPeed(0);
-            this.invaderFourth.setSPeed(0);
-            this.app.charge.setLooping(false);
-            this.app.charge.setVolume(this.chargeVolume);
-            this.invaderFirst.setBrighterLight(this.invaderFirst.getBigInvaderLight());
-            this.invaderSecond.setBrighterLight(this.invaderSecond.getBigInvaderLight());
-            this.invaderThird.setBrighterLight(this.invaderThird.getBigInvaderLight());
-            this.invaderFourth.setBrighterLight(this.invaderFourth.getBigInvaderLight());
-
-        }
-        if (this.invaderState == States.CHARGING && !this.app.charge.isPlaying()) {
-            this.app.horn.play();
-            this.app.horn.setVolume(this.hornVolume);
-            this.invaderState = States.SHOOTING;
-        }
-        if (this.invaderState == States.SHOOTING && this.app.horn.isPlaying()) {
-            this.invaderFirst.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
-            this.invaderSecond.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
-            this.invaderThird.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
-            this.invaderFourth.getBigInvaderLight().setDistance(BigInvader.INVADER_LIGHT_DISTANCE);
-            this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderFirst));
-            this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderSecond));
-            this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderThird));
-            this.bullets.add(new BigInvaderBullet(rayHandler, this.invaderFourth));
-        }
-        if (this.invaderState == States.SHOOTING && !this.app.horn.isPlaying()) {
-            this.invaderFirst.setSPeed(this.tempSpeedFirstInvader);
-            this.invaderSecond.setSPeed(this.tempSpeedSecondInvader);
-            this.invaderThird.setSPeed(this.tempSpeedThirdInvader);
-            this.invaderFourth.setSPeed(this.tempSpeedFourthInvader);
-            this.invaderState = States.NEUTRAL;
-            this.timeStart = 0;
-            this.invaderFirst = null;
-            this.invaderSecond = null;
-            this.invaderThird = null;
-            this.invaderFourth = null;
         }
     }
 

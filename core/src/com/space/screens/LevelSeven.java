@@ -31,6 +31,6 @@ public class LevelSeven extends LevelThree implements Screen {
         this.shootingLevels();
     }
     protected void shootingLevels () {
-        this.bigInvaderBulletManager.shootingLevelSeven(this.rayHandler, this.bigInvaderManager.getInvaders());
+        this.bigInvaderBulletManager.shooting(1, this.rayHandler, this.bigInvaderManager.getInvaders());
     }
 }
