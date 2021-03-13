@@ -13,7 +13,7 @@ public class InvaderManager {
 
 
     public InvaderManager(RayHandler rayHandler) {
-        this.invaders = new Invader[InvaderManager.INVADERS_ROWS][InvaderManager.INVADERS_COLUMNS];
+        this.invaders = new Invader[INVADERS_ROWS][INVADERS_COLUMNS];
         for (int row = 0; row < this.invaders.length; row++) {
             for (int column = 0; column < this.invaders[row].length; column++) {
                 int invadersLeftBeginning = 100;

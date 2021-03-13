@@ -14,8 +14,8 @@ public class BigInvaderManager {
 
     public BigInvaderManager(RayHandler rayHandler) {
         this.invaders = new Array<>();
-        for (int invadersIndex = 0; invadersIndex < BigInvaderManager.INVADERS_COUNT; invadersIndex++) {
-            this.invaders.add(new BigInvader(rayHandler, invadersIndex * BigInvaderManager.INVADERS_SPACING));
+        for (int invadersIndex = 0; invadersIndex < INVADERS_COUNT; invadersIndex++) {
+            this.invaders.add(new BigInvader(rayHandler, invadersIndex * INVADERS_SPACING));
         }
     }
 

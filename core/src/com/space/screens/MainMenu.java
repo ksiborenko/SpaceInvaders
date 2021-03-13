@@ -17,6 +17,11 @@ import com.space.utils.States;
 
 public class MainMenu implements Screen {
 
+    public static final int X_BUTTON_OFFSET = 150;
+    public static final int Y_FIXED_BUTTON_POSITION = 110;
+    public static final int RAYS = 80;
+    public static final int DISTANCE = 150;
+
     private final App app;
     private final World world;
     private final Box2DDebugRenderer renderer;
@@ -142,71 +147,69 @@ public class MainMenu implements Screen {
         this.resetSavesButtonTexture = new Texture("resetSaves.png");
         this.resetSavesButtonTextureInactive = new Texture("resetSavesInactive.png");
 
-        int yFixedButtonsPosition = 110;
+
         this.levelOneButtonPosition = new Vector2((float) App.WIDTH / 4 - (float) this.levelOneButtonTexture.getWidth() / 2,
-                App.HEIGHT - yFixedButtonsPosition);
+                App.HEIGHT - Y_FIXED_BUTTON_POSITION);
         this.levelTwoButtonPosition = new Vector2((float) App.WIDTH / 2 - (float) this.levelTwoButtonTexture.getWidth() / 2,
-                App.HEIGHT - yFixedButtonsPosition);
+                App.HEIGHT - Y_FIXED_BUTTON_POSITION);
         this.levelThreeButtonPosition = new Vector2((float) App.WIDTH / 4 * 3 - (float) this.levelThreeButtonTexture.getWidth() / 2,
-                App.HEIGHT - yFixedButtonsPosition);
+                App.HEIGHT - Y_FIXED_BUTTON_POSITION);
         this.levelFourButtonPosition = new Vector2((float) App.WIDTH / 4 - (float) this.levelFourButtonTexture.getWidth() / 2,
-                App.HEIGHT - yFixedButtonsPosition * 2);
+                App.HEIGHT - Y_FIXED_BUTTON_POSITION * 2);
         this.levelFiveButtonPosition = new Vector2((float) App.WIDTH / 2 - (float) this.levelFiveButtonTexture.getWidth() / 2,
-                App.HEIGHT - yFixedButtonsPosition * 2);
+                App.HEIGHT - Y_FIXED_BUTTON_POSITION * 2);
         this.levelSixButtonPosition = new Vector2((float) App.WIDTH / 4 * 3 - (float) this.levelSixButtonTexture.getWidth() / 2,
-                App.HEIGHT - yFixedButtonsPosition * 2);
+                App.HEIGHT - Y_FIXED_BUTTON_POSITION * 2);
         this.levelSevenButtonPosition = new Vector2((float) App.WIDTH / 4 - (float) this.levelSevenButtonTexture.getWidth() / 2,
-                App.HEIGHT - yFixedButtonsPosition * 3);
+                App.HEIGHT - Y_FIXED_BUTTON_POSITION * 3);
         this.levelEightButtonPosition = new Vector2((float) App.WIDTH / 2 - (float) this.levelEightButtonTexture.getWidth() / 2,
-                App.HEIGHT - yFixedButtonsPosition * 3);
+                App.HEIGHT - Y_FIXED_BUTTON_POSITION * 3);
         this.levelNineButtonPosition = new Vector2((float) App.WIDTH / 4 * 3 - (float) this.levelNineButtonTexture.getWidth() / 2,
-                App.HEIGHT - yFixedButtonsPosition * 3);
+                App.HEIGHT - Y_FIXED_BUTTON_POSITION * 3);
         this.levelFinalButtonPosition = new Vector2((float) App.WIDTH / 2 - (float) this.levelFinalButtonTexture.getWidth() / 2,
-                App.HEIGHT - yFixedButtonsPosition * 4);
+                App.HEIGHT - Y_FIXED_BUTTON_POSITION * 4);
 
 
-        int xButtonsOffset = 150;
-        this.resetKillsButtonPosition = new Vector2(xButtonsOffset,
-                yFixedButtonsPosition - this.resetKillsButtonTexture.getHeight());
-        this.resetSavesButtonPosition = new Vector2(App.WIDTH - xButtonsOffset - this.resetSavesButtonTexture.getWidth(),
-                yFixedButtonsPosition - this.resetKillsButtonTexture.getHeight());
+        this.resetKillsButtonPosition = new Vector2(X_BUTTON_OFFSET,
+                Y_FIXED_BUTTON_POSITION - this.resetKillsButtonTexture.getHeight());
+        this.resetSavesButtonPosition = new Vector2(App.WIDTH - X_BUTTON_OFFSET - this.resetSavesButtonTexture.getWidth(),
+                Y_FIXED_BUTTON_POSITION - this.resetKillsButtonTexture.getHeight());
 
-        int rays = 80;
-        int distance = 150;
-        this.resetInvadersLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+
+        this.resetInvadersLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.resetKillsButtonPosition.x + (float) this.resetKillsButtonTexture.getWidth() / 2,
                 this.resetKillsButtonPosition.y + (float) this.resetKillsButtonTexture.getHeight() / 2);
-        this.resetISavesLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.resetISavesLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.resetSavesButtonPosition.x + (float) this.resetSavesButtonTexture.getWidth() / 2,
                 this.resetSavesButtonPosition.y + (float) this.resetSavesButtonTexture.getHeight() / 2);
-        this.levelOneLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.levelOneLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.levelOneButtonPosition.x + (float) this.levelOneButtonTexture.getWidth() / 2,
                 this.levelOneButtonPosition.y + (float) this.levelOneButtonTexture.getHeight() / 2);
-        this.levelTwoLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.levelTwoLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.levelTwoButtonPosition.x + (float) this.levelTwoButtonTexture.getWidth() / 2,
                 this.levelTwoButtonPosition.y + (float) this.levelTwoButtonTexture.getHeight() / 2);
-        this.levelThreeLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.levelThreeLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.levelThreeButtonPosition.x + (float) this.levelThreeButtonTexture.getWidth() / 2,
                 this.levelThreeButtonPosition.y + (float) this.levelThreeButtonTexture.getHeight() / 2);
-        this.levelFourLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.levelFourLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.levelFourButtonPosition.x + (float) this.levelFourButtonTexture.getWidth() / 2,
                 this.levelFourButtonPosition.y + (float) this.levelFourButtonTexture.getHeight() / 2);
-        this.levelFiveLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.levelFiveLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.levelFiveButtonPosition.x + (float) this.levelFiveButtonTexture.getWidth() / 2,
                 this.levelFiveButtonPosition.y + (float) this.levelFiveButtonTexture.getHeight() / 2);
-        this.levelSixLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.levelSixLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.levelSixButtonPosition.x + (float) this.levelSixButtonTexture.getWidth() / 2,
                 this.levelSixButtonPosition.y + (float) this.levelSixButtonTexture.getHeight() / 2);
-        this.levelSevenLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.levelSevenLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.levelSevenButtonPosition.x + (float) this.levelSevenButtonTexture.getWidth() / 2,
                 this.levelSevenButtonPosition.y + (float) this.levelSevenButtonTexture.getHeight() / 2);
-        this.levelEightLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.levelEightLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.levelEightButtonPosition.x + (float) this.levelEightButtonTexture.getWidth() / 2,
                 this.levelEightButtonPosition.y + (float) this.levelEightButtonTexture.getHeight() / 2);
-        this.levelNineLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.levelNineLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.levelNineButtonPosition.x + (float) this.levelNineButtonTexture.getWidth() / 2,
                 this.levelNineButtonPosition.y + (float) this.levelNineButtonTexture.getHeight() / 2);
-        this.levelFinalLight = new PointLight(rayHandler, rays, Color.BLACK, distance,
+        this.levelFinalLight = new PointLight(rayHandler, RAYS, Color.BLACK, DISTANCE,
                 this.levelFinalButtonPosition.x + (float) this.levelFinalButtonTexture.getWidth() / 2,
                 this.levelFinalButtonPosition.y + (float) this.levelFinalButtonTexture.getHeight() / 2);
 

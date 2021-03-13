@@ -9,21 +9,18 @@ import com.space.sprites.BigInvader;
 import com.space.sprites.bullets.BigInvaderBullet;
 import com.space.utils.States;
 
-import java.util.Random;
-
 public class BigInvaderBulletManager {
 
     private final App app;
     private final Array<BigInvaderBullet> bullets;
     private float timeStart;
 
-    private BigInvader[] invaders;
-    private float[] invaderSpeedCache;
+    private final BigInvader[] invaders;
+    private final float[] invaderSpeedCache;
     private final float timeEvent;
     private final float chargeVolume;
     private final float hornVolume;
     private States invaderState;
-    private final Random random;
 
 
     public BigInvaderBulletManager(App app) {
@@ -35,7 +32,6 @@ public class BigInvaderBulletManager {
         this.timeEvent = 5f;
         this.app = app;
         this.bullets = new Array<>();
-        this.random = new Random();
         this.invaderState = States.NEUTRAL;
     }
 
