@@ -8,6 +8,8 @@ import com.space.App;
 
 public class Lights {
 
+    public static final int RAYS = 200;
+    public static final int DISTANCE = 350;
     private final Light leftFirst;
     private final Light leftSecond;
     private final Light right;
@@ -16,11 +18,9 @@ public class Lights {
         rayHandler.setShadows(true);
         rayHandler.setCulling(true);
         rayHandler.setBlur(true);
-        int rays = 200;
-        int distance = 350;
-        this.right = new PointLight(rayHandler, rays, Color.WHITE, distance, App.WIDTH, App.HEIGHT);
-        this.leftFirst = new PointLight(rayHandler, rays, Color.WHITE, distance, 0, App.HEIGHT);
-        this.leftSecond = new PointLight(rayHandler, rays, Color.WHITE, distance, 0, App.HEIGHT);
+        this.right = new PointLight(rayHandler, RAYS, Color.WHITE, DISTANCE, App.WIDTH, App.HEIGHT);
+        this.leftFirst = new PointLight(rayHandler, RAYS, Color.WHITE, DISTANCE, 0, App.HEIGHT);
+        this.leftSecond = new PointLight(rayHandler, RAYS, Color.WHITE, DISTANCE, 0, App.HEIGHT);
     }
 
     public Light getLeftFirst() {

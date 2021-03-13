@@ -32,7 +32,7 @@ public class DefenderManager {
     public void defenderMovement() {
         for (Defender defender : defenders) {
             defender.getDefenderPosition().x += this.defenderSpeed;
-            if (defender.getDefenderPosition().x > App.WIDTH - defender.getDEFENDER_TEXTURE().getWidth() ||
+            if (defender.getDefenderPosition().x > App.WIDTH - defender.getDefenderTexture().getWidth() ||
                     defender.getDefenderPosition().x < 0) {
                 reverseSpeed();
             }

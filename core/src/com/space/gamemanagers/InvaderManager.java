@@ -45,10 +45,10 @@ public class InvaderManager {
                 }
                 int invadersWidth = 50;
                 if (value != null &&
-                        value.getINVADER_POSITION().x > App.WIDTH - invadersWidth) {
+                        value.getInvaderPosition().x > App.WIDTH - invadersWidth) {
                     value.invaderReverseSpeed();
                 }
-                if (value != null && value.getINVADER_POSITION().x < 0) {
+                if (value != null && value.getInvaderPosition().x < 0) {
                     value.invaderMovementLeft();
                 }
             }

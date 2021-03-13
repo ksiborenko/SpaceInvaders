@@ -12,8 +12,8 @@ public class InvaderBullet extends AbstractBullet {
 
     public InvaderBullet(RayHandler rayHandler, Invader invader) {
         super();
-        this.bulletPosition.set(invader.getINVADER_POSITION().x + (float) invader.getInvaderTexture().getWidth() / 2,
-                invader.getINVADER_POSITION().y + (float) invader.getInvaderTexture().getHeight() / 2);
+        this.bulletPosition.set(invader.getInvaderPosition().x + (float) invader.getInvaderTexture().getWidth() / 2,
+                invader.getInvaderPosition().y + (float) invader.getInvaderTexture().getHeight() / 2);
         this.bulletLight = new PointLight(rayHandler, 20, Color.RED, 60,
                 this.bulletPosition.x, this.bulletPosition.y);
         this.bulletRectangle.set(this.bulletPosition.x, this.bulletPosition.y, this.bulletTexture.getWidth(),
